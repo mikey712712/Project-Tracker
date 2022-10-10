@@ -1,0 +1,36 @@
+<%- include('./partials/head.ejs', {tabTitle: 'New Project'}) %>
+
+<%- include('./partials/header.ejs', {}) %>
+
+
+<h1>Create Project</h1>
+<form action="/projects" method="post" enctype="multipart/form-data">
+    <label for="title">Project Title</label>
+    <input type="text" name="title" id="title" required />
+    <label for="deadline">Deadline</label>
+    <input type="date" name="deadline" id="deadline" />
+    <h3>Files</h3>
+    <div class="add-files">
+        <input type="file" name="projectFile" />
+        <p class="add-file-btn">+</p>
+    </div>
+    <label for="description">Description</label>
+    <textarea name="description" id="description"></textarea>
+    <% if (user.team !== undefined) { %>
+    <label for="team">Team Project</label>
+    <input type="checkbox" name="team" id="team" value="true" />
+    <% } %>
+    <input type="submit" value="Create Project" />
+</form>
+<script>
+    const addFileDiv = document.querySelector('.add-files')
+    const addFileBtn = document.querySelector('.add-file-btn')
+    addFileBtn.addEventListener('click', () => {
+        event.stopPropagation()
+        const fileInput = document.createElement('input')
+        fileInput.type = "file"
+        fileInput.name = "projectFile"
+        addFileDiv.insertBefore(fileInput, addFileBtn);
+    })
+</script>
+<%- include('./partials/foot.ejs', {}) %>

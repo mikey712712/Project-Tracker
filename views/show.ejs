@@ -1,0 +1,17 @@
+<%- include('./partials/head.ejs', {tabTitle: project.title}) %>
+
+<%- include('./partials/header.ejs', {}) %>
+
+<div class="show-container container">
+    <h2><%= project.title %></h2>
+    <p class="show-date">Created: <%= project.createdAt.toDateString() %></p>
+    <div class="show-file-container">
+        <% for (let file of project.files) { %>
+        <a href="<%= file.path %>">
+            <img class="show-img" src="<%= file.path.slice(0, -4) %>.png">
+        </a>
+        <% } %>
+    </div>
+</div>
+
+<%- include('./partials/foot.ejs', {}) %>

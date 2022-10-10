@@ -1,0 +1,24 @@
+<%- include('./partials/head.ejs', { tabTitle: 'Register' }) %>
+
+<h1 class="register">Register</h1>
+<div class="register-container">
+    <p><a href="/login">Back to Login</a></p>
+
+    <form method="post" action="/register">
+
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" required />
+
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required />
+
+        <label for="team">Team (optional, try DemoTeam1) </label>
+        <input type="text" name="team" id="team" />
+
+        <input type="submit" value="Register" />
+    </form>
+</div>
+
+<%- include('./partials/flash.ejs', {}) %>
+
+<%- include('./partials/foot.ejs') %>
