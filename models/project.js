@@ -3,11 +3,24 @@ const projectSchema = new mongoose.Schema(
 	{
 		title: { type: String, required: true },
 		description: { type: String },
-		files: [Object],
+		files: [
+			{
+				originalname: String,
+				path: String,
+				description: String,
+			},
+		],
 		deadline: Date,
 		team: String,
 		user: String,
 		todos: [String],
+		notes: [
+			{
+				title: { type: String, default: "Untitled" },
+				content: { type: String, required: true },
+				createdAt: Date,
+			},
+		],
 	},
 	{
 		timestamps: true,

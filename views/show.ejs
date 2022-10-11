@@ -2,16 +2,134 @@
 
 <%- include('./partials/header.ejs', {}) %>
 
-<div class="show-container container">
-    <h2><%= project.title %></h2>
-    <p class="show-date">Created: <%= project.createdAt.toDateString() %></p>
-    <div class="show-file-container">
-        <% for (let file of project.files) { %>
-        <a href="<%= file.path %>">
-            <img class="show-img" src="<%= file.path.slice(0, -4) %>.png">
-        </a>
-        <% } %>
+<% if (teamProject) { %>
+<div class="collaborators">
+    <div class="collapse collapse-horizontal" id="collapseWidthExample">
+        <div class="card card-body" style="min-width: 250px; width: fit-content">
+            <h5><%= project.team %> Users</h5>
+
+            <ul>
+                <% for (let user of teamUsers) { %>
+                <li><%= user.username %> </li>
+                <% } %>
+            </ul>
+        </div>
     </div>
 </div>
+<p class="collaborators-button">
+    <button class="btn btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+        <i class="bi bi-people-fill"></i> Collaborators
+    </button>
+</p>
+<% } %>
+<div class="show-container">
+    <div class="show-main-info">
+        <h1><%= project.title %></h1>
+        <p class="show-date">Created: <%= project.createdAt.toDateString() %></p>
+        <p class="show-date">Due: <%= project.deadline?.toDateString() ? project.deadline.toDateString() : "No deadline" %></p>
+    </div>
 
+    <div class="show-files">
+        <h2>Files</h2>
+        <div class="show-file-container">
+            <% for (let file of project.files) { %>
+            <div class="show-file">
+                <h5><%= file.originalname %> </h5>
+                <a href="<%= file.path %>">
+                    <img class="show-img" src="<%= file.path.slice(0, -4) %>.png">
+                </a>
+                <h6>File Description</h6>
+                <p>
+                    <%= file.description ? file.description : 'No Description' %>
+                </p>
+            </div>
+            <% } %>
+        </div>
+    </div>
+    <div class="show-notes">
+        <h2>Notes</h2>
+        <div class="show-note-container">
+            <button class="btn btn-primary add-note">Add Note</button>
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+                <% for (let note of project.notes) { %>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-heading<%= project.notes.indexOf(note) %>">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse<%= project.notes.indexOf(note) %>" aria-expanded="false" aria-controls="panelsStayOpen-collapse<%= project.notes.indexOf(note) %>">
+                            <%= note.title %>
+
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapse<%= project.notes.indexOf(note) %>" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading<%= project.notes.indexOf(note) %>">
+                        <div class="accordion-body">
+                            <strong style="font-size: .8em; color: #2a2a72; opacity: 0.7;"><%= note.createdAt.toDateString() %> <%= note.createdAt.toTimeString().slice(0,5) %></strong>
+                            <form style="float: right" action="/projects/<%= project._id %>/deletenote?_method=PUT" method="post">
+                                <input type="text" name="title" value="<%= note.title %>" style="scale:0; position: absolute">
+                                <input type="text" name="content" value="<%= note.content %>" style="scale:0; position: absolute">
+                                <input type="text" name="createdAt" value="<%= note.createdAt %>" style="scale:0; position: absolute">
+                                <input type="submit" class="btn btn-light" style="font-size: 0.8em;" value="Delete Note">
+                            </form>
+                            <br />
+                            <p style="max-width: 100%; text-align: left; word-break:break-word; margin-top: 25px"><%= note.content %></p>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <div class="hr">
+        <hr />
+    </div>
+    <div class="show-description">
+        <h2>Description</h2>
+        <p>
+            <%= project.description ? project.description : 'No Description' %>
+        </p>
+    </div>
+    <div class="hr">
+        <hr />
+    </div>
+    <div class="show-todos">
+        <h2>To-dos</h2>
+        <p>
+            <%= project.todos?.length > 0 ? project.todos : 'Nothing to do' %>
+        </p>
+    </div>
+</div>
+<script>
+    const addNoteBtn = document.querySelector('.add-note')
+    addNoteBtn.addEventListener('click', () => {
+        const noteForm = document.createElement('form')
+        noteForm.action = "/projects/<%= project._id %>/postnote"
+        noteForm.method = "post"
+
+        const noteTitle = document.createElement('input')
+        const noteTitleLabel = document.createElement('label')
+        noteTitle.type = "text"
+        noteTitle.name = "title"
+        noteTitle.id = "title"
+        noteTitle.required = true
+        noteTitle.classList.add("form-control")
+        noteTitleLabel.innerHTML = "Title"
+        noteTitleLabel.for = "title"
+
+        const noteContent = document.createElement('textarea')
+        noteContent.name = "content"
+        noteContent.classList.add("form-control")
+        noteContent.placeholder = "Type your note here"
+
+        const submitBtn = document.createElement('input')
+        submitBtn.type = "submit"
+        submitBtn.value = "Save"
+        submitBtn.classList.add('btn', 'btn-primary')
+
+        noteForm.appendChild(noteTitleLabel)
+        noteForm.appendChild(noteTitle)
+        noteForm.appendChild(noteContent)
+        noteForm.appendChild(submitBtn)
+        addNoteBtn.remove()
+        const noteContainer = document.querySelector('.show-note-container')
+        noteContainer.insertBefore(noteForm, noteContainer.firstChild)
+    })
+</script>
 <%- include('./partials/foot.ejs', {}) %>

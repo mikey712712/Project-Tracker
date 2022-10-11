@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const passportLocalMongoose = require("passport-local-mongoose")
 const userSchema = new mongoose.Schema({
 	userProjects: [String],
-	team: String,
+	team: { type: String, default: "noteam" },
 })
 
 userSchema.plugin(passportLocalMongoose)

@@ -2,26 +2,27 @@
 
 <%- include('./partials/header.ejs', {}) %>
 
-
-<h1>Create Project</h1>
-<form action="/projects" method="post" enctype="multipart/form-data">
-    <label for="title">Project Title</label>
-    <input type="text" name="title" id="title" required />
-    <label for="deadline">Deadline</label>
-    <input type="date" name="deadline" id="deadline" />
-    <h3>Files</h3>
-    <div class="add-files">
-        <input type="file" name="projectFile" />
-        <p class="add-file-btn">+</p>
-    </div>
-    <label for="description">Description</label>
-    <textarea name="description" id="description"></textarea>
-    <% if (user.team !== undefined) { %>
-    <label for="team">Team Project</label>
-    <input type="checkbox" name="team" id="team" value="true" />
-    <% } %>
-    <input type="submit" value="Create Project" />
-</form>
+<div class="new-container">
+    <h1>Create a Project</h1>
+    <form action="/projects" method="post" enctype="multipart/form-data">
+        <label class="form-label" for="title">Project Title</label>
+        <input class="form-control" type="text" name="title" id="title" required />
+        <label class="form-label" for="deadline">Deadline</label>
+        <input class="form-control" type="date" name="deadline" id="deadline" />
+        <h3>Files</h3>
+        <div class="add-files">
+            <input class="form-control" type="file" name="projectFile" />
+            <p class="add-file-btn">+</p>
+        </div>
+        <label class="form-label" for="description">Description</label>
+        <textarea name="description" id="description"></textarea>
+        <% if (user.team !== undefined) { %>
+        <label class="form-check-label" for="team">Team Project</label>
+        <input class="form-check-input" type="checkbox" name="team" id="team" value="true" />
+        <% } %>
+        <input type="submit" value="Create Project" />
+    </form>
+</div>
 <script>
     const addFileDiv = document.querySelector('.add-files')
     const addFileBtn = document.querySelector('.add-file-btn')
@@ -29,7 +30,10 @@
         event.stopPropagation()
         const fileInput = document.createElement('input')
         fileInput.type = "file"
+        fileInput.classList.add('form-control')
         fileInput.name = "projectFile"
+        fileInput.classList.toggle('blur')
+        setTimeout(() => fileInput.classList.toggle('blur'))
         addFileDiv.insertBefore(fileInput, addFileBtn);
     })
 </script>

@@ -1,0 +1,32 @@
+<%- include('./partials/head.ejs', {tabTitle: 'Projects'} ) %>
+
+<%- include('./partials/header.ejs', {}) %>
+<div class="projects-container">
+    <div class="projects-user-projects">
+        <h2>My Projects</h2>
+        <% for (let i = 0; i < projects.length; i++) { %>
+        <% if (projects[i].files.length > 0) { %>
+        <a href="/projects/<%= projects[i]._id %>">
+            <% } else { %>
+            <a href="/projects/<%= projects[i]._id %>" style="height: 70px !important">
+                <% } %>
+                <div class="projects-user-project">
+                    <% if (projects[i].files.length > 0) { %>
+                    <img src="<%= projects[i].files[0]['path'].slice(0, -4) %>.png">
+                    <div class="project-name">
+                        <h4><%= projects[i].title %></h4>
+                        <p>Created: <%= projects[i].createdAt.toDateString() %></p>
+                    </div>
+                    <% } else { %>
+                    <div class="project-name" style="top: 0; left: 0; width: 100%; max-width: 100%; margin: 0;">
+                        <h4><%= projects[i].title %></h4>
+                        <p>Created: <%= projects[i].createdAt.toDateString() %></p>
+                    </div>
+                    <% } %>
+                </div>
+            </a>
+            <% } %>
+    </div>
+</div>
+
+<%- include('./partials/foot.ejs', {}) %>

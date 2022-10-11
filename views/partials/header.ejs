@@ -1,6 +1,19 @@
 <header>
-    <form method="post" action="/logout">
-        <a class="header-anchor" onclick="this.parentNode.submit();">Logout</a>
-    </form>
     <a href="/projects">Home</a>
+    <div class="dropdown">
+        <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white; font-weight: bold;">
+            Account
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark" style="color: white">
+            <li><a class="dropdown-item" href="#">View Account</a></li>
+            <li><a class="dropdown-item" href="/projects/my">My Projects</a></li>
+            <li><a class="dropdown-item" href="/projects/team">Team Projects</a></li>
+            <li><a class="dropdown-item" href="/projects/new">New Project</a></li>
+            <li>
+                <form class="dropdown-item" method="post" action="/logout">
+                    <a onclick="this.parentNode.submit();">Logout</a>
+                </form>
+            </li>
+        </ul>
+    </div>
 </header>
