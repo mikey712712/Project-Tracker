@@ -3,28 +3,27 @@
 <%- include('./partials/header.ejs', {}) %>
 
 <div class="new-container">
-    <h1>Create a Project</h1>
-    <form action="/projects" method="post" enctype="multipart/form-data">
+    <h1>Edit <%= project.name %></h1>
+    <form action="/projects/<%= project._id %>/edit?_method=PUT" method="post" enctype="multipart/form-data">
         <label class="form-label" for="title">Project Title</label>
-        <input class="form-control" type="text" name="title" id="title" required />
-        <label class="form-label" for="deadline">Deadline</label>
-        <input class="form-control" type="date" name="deadline" id="deadline" />
-        <h3>Files</h3>
+        <input class="form-control" type="text" name="title" id="title" value="<%= project.title %>" required />
+        <label class="form-label">Deadline</label>
+        <input class="form-control" type="date" name="deadline" id="deadline" value="<%= project.deadline?.toISOString().substr(0, 10); %>" />
+        <h3>Add Files</h3>
         <div class="add-files">
             <input class="form-control" type="file" name="projectFile" />
             <p class="add-file-btn">+</p>
         </div>
         <label class="form-label" for="description">Description</label>
-        <br />
-        <textarea class="form-control" name="description" id="description"></textarea>
+        <textarea class="form-control" name="description" id="description"><%= project.description %></textarea>
         <% if (user.team !== undefined) { %>
         <div class="team-project-selector">
             <label class="form-check-label" for="team">Team Project</label>
-            <input class="form-check-input" type="checkbox" name="team" id="team" value="true" />
+            <input class="form-check-input" type="checkbox" name="team" id="team" value="true" <% if (project.team !== undefined) {  %> <%= "checked" %> <% } %> />
         </div>
         <% } %>
-        <input class="btn btn-primary" type="submit" value="Create Project" />
-        <a href="/projects" style="margin-bottom: 20px; margin-left: 5px" class="btn btn-secondary" type="submit">Cancel</a>
+        <input class="btn btn-primary" type="submit" value="Save Changes" />
+        <a href="/projects/<%= project._id %>" style="margin-bottom: 20px; margin-left: 5px" class="btn btn-secondary" type="submit">Cancel</a>
     </form>
 </div>
 <script>
@@ -41,4 +40,5 @@
         addFileDiv.insertBefore(fileInput, addFileBtn);
     })
 </script>
+
 <%- include('./partials/foot.ejs', {}) %>

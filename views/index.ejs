@@ -42,7 +42,7 @@
                             <p>Created: <%= userProjects[i].createdAt.toDateString() %></p>
                         </div>
                         <% } else { %>
-                        <div class="project-name" style="top: 0 !important; left: 0 !important; width: 100% !important; height: 70px !important">
+                        <div class="project-name" style="top: 0 !important; left: 0 !important; width: 100% !important; height: 70px !important; max-width: 100% !important">
                             <h4><%= userProjects[i].title %></h4>
                             <p>Created: <%= userProjects[i].createdAt.toDateString() %></p>
                         </div>
@@ -92,7 +92,7 @@
                             <p>Created: <%= teamProjects[i].createdAt.toDateString() %></p>
                         </div>
                         <% } else { %>
-                        <div class="project-name" style="top: 0 !important; left: 0 !important; width: 100% !important; height: 70px !important">
+                        <div class="project-name" style="top: 0 !important; left: 0 !important; width: 100% !important; height: 70px !important; max-width: 100% !important">
                             <h4><%= teamProjects[i].title %></h4>
                             <p>Created: <%= teamProjects[i].createdAt.toDateString() %></p>
                         </div>
@@ -112,6 +112,14 @@
     </div>
     <div class="upcoming-container">
         <h2>Upcoming Deadlines</h2>
+        <% for (let task of deadlines) { %>
+        <div class="card" style="margin: 0 auto 15px auto; width: 100%">
+            <div class="card-body">
+                <strong><%= task.deadline.toDateString() %></strong>
+                <p style="margin-bottom: 0"><%= task.title %></p>
+            </div>
+        </div>
+        <% } %>
     </div>
 </div>
 <%- include('./partials/foot.ejs', {}) %>
