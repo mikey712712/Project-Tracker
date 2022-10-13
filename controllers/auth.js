@@ -30,7 +30,7 @@ router.post("/register", async (req, res) => {
 })
 router.get("/login", (req, res) => {
 	if (req.isAuthenticated()) {
-		res.redirect("back")
+		res.redirect("/projects")
 	} else {
 		res.render("login.ejs")
 	}
