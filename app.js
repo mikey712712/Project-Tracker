@@ -10,9 +10,8 @@ const session = require("express-session")
 const mongoDBSession = require("connect-mongodb-session")
 const User = require("./models/users")
 const app = express()
-const PORT = 3000
 
-const dbURL = "mongodb://localhost:27017/projectmanager"
+const dbURL = process.env.MONGODB_URL
 const db = mongoose.connection
 
 mongoose.connect(dbURL, async () => {
@@ -51,6 +50,6 @@ app.get("/", (req, res) => {
 app.use(authController)
 app.use(projectsController)
 
-app.listen(PORT, () => {
-	console.log("Listening on PORT", PORT)
+app.listen(process.env.PORT || 5000, () => {
+	console.log("listening on port" + `${process.env.PORT}`)
 })
