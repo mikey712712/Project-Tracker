@@ -114,10 +114,12 @@
         <h2>Upcoming Deadlines</h2>
         <% for (let task of deadlines) { %>
         <div class="card" style="margin: 0 auto 15px auto; width: 100%">
-            <div class="card-body">
-                <strong><%= task.deadline.toDateString() %></strong>
-                <p style="margin-bottom: 0"><%= task.title %></p>
-            </div>
+            <a href="/projects/<%= task._id %>" style="text-decoration: none; color: black">
+                <div class="card-body">
+                    <strong><%= task.deadline.toDateString() %></strong>
+                    <p style="margin-bottom: 0"><%= task.title %></p>
+                </div>
+            </a>
         </div>
         <% } %>
     </div>

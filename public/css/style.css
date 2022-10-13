@@ -3,6 +3,10 @@
 	--bs-body-color: #232528 !important;
 }
 
+html {
+	min-height: 100%;
+}
+
 body {
 	font-family: "Inter", sans-serif;
 	width: 100%;
@@ -268,7 +272,7 @@ div.project-name {
 }
 
 .show-files {
-	min-height: 580px;
+	min-height: 100px;
 	height: fit-content;
 	width: 100%;
 	padding-top: 0;
@@ -277,7 +281,7 @@ div.project-name {
 .show-notes {
 	height: fit-content;
 	min-height: 380px;
-	max-height: 540px;
+	max-height: 590px;
 	width: 50%;
 	overflow: scroll;
 	padding-top: 0;
@@ -287,6 +291,8 @@ div.project-name {
 	display: flex;
 	flex-flow: row nowrap;
 	gap: 20px;
+	width: fit-content;
+	max-width: 100%;
 	overflow: scroll;
 	border-radius: 10px;
 }
@@ -320,25 +326,36 @@ div.project-name {
 	margin-top: 0;
 }
 
+.show-file {
+	background-color: white;
+	color: #232528;
+	box-sizing: border-box;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: flex-start;
+	padding: 20px 20px 10px 20px;
+	border-radius: 10px;
+	border: 2px solid #232528;
+	margin-bottom: 20px;
+}
+
 .show-img {
 	height: 330px;
 	border-radius: 10px;
 	border: 1px solid #232528;
 }
 
-.show-file {
-	background-color: white;
-	color: #232528;
-	box-sizing: border-box;
-	padding: 20px 20px 10px 20px;
-	border-radius: 10px;
-	border: 2px solid #232528;
-	text-align: left;
-	margin-bottom: 20px;
+.show-img-a {
+	align-self: center;
 }
 
 .show-file h6 {
 	margin: 15px 0 0 0;
+}
+
+.show-file h5 {
+	margin-bottom: 24px;
+	width: fit-content;
 }
 
 .show-file p {
@@ -383,6 +400,18 @@ div.project-name {
 
 .collaborators-button button {
 	font-size: 0.8em;
+}
+
+.login-card,
+.register-card {
+	margin: 200px auto;
+	width: 500px;
+	max-width: 95%;
+}
+
+.login-card input,
+.register-card input {
+	margin-bottom: 15px;
 }
 
 .add-files {

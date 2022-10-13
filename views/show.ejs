@@ -78,9 +78,11 @@
         <div class="show-file-container">
             <% for (let file of project.files) { %>
             <div class="show-file">
-                <a data-bs-toggle="modal" data-bs-target="#staticBackdrop<%= project.files.indexOf(file) %>" class="btn btn-light" style="float:right; font-size: 0.8em; margin-bottom: 10px;">Edit</a>
-                <h5><%= file.originalname %> </h5>
-                <a class="show-img-a" href="<%= file._id %>">
+                <div style="width: 100%">
+                    <a data-bs-toggle="modal" data-bs-target="#staticBackdrop<%= project.files.indexOf(file) %>" class="btn btn-light" style="float: right; font-size: 0.8em; margin-bottom: 10px;">Edit</a>
+                    <h5><%= file.originalname %> </h5>
+                </div>
+                <a class="show-img-a" href="<%= file.path %>">
                     <img class="show-img" src="<%= file.path.slice(0, -4) %>.png">
                 </a>
                 <h6>File Description:</h6>

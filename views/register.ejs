@@ -1,22 +1,28 @@
 <%- include('./partials/head.ejs', { tabTitle: 'Register' }) %>
 
-<h1 class="register">Register</h1>
 <div class="register-container">
-    <p><a href="/login">Back to Login</a></p>
+    <div class="card register-card">
+        <div class="card-body">
+            <h1 class="register">Register</h1>
 
-    <form method="post" action="/register">
 
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" required />
+            <form method="post" action="/register">
 
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" required />
+                <label class="form-label" for="username">Username</label>
+                <input class="form-control" type="text" name="username" id="username" required />
 
-        <label for="team">Team (optional, try DemoTeam1) </label>
-        <input type="text" name="team" id="team" />
+                <label class="form-label" for="password">Password</label>
+                <input class="form-control" type="password" name="password" id="password" required />
 
-        <input type="submit" value="Register" />
-    </form>
+                <label class="form-label" for="team">Team (optional, try DemoTeam1) </label>
+                <input class="form-control" type="text" name="team" id="team" />
+
+                <input class="btn btn-dark" type="submit" value="Register" />
+                <p style="float:right; font-size: 0.8em;">Already have an account? <a href="/login">Login</a></p>
+
+            </form>
+        </div>
+    </div>
 </div>
 
 <%- include('./partials/flash.ejs', {}) %>
