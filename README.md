@@ -32,4 +32,4 @@ The app is built as a full-stack web application utilising the following technol
     <li>Javascript</li>
     <li>Passport Authentication Middleware</li>
 </ul>
-The app is deployed through Heroku.
+<p>The app is deployed through Heroku.<p>
