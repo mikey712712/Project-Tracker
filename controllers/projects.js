@@ -126,7 +126,7 @@ router.put("/projects/:projectId/edit", upload.any("projectFile"), async (req, r
 // EDIT FILE
 router.put("/projects/:projectId/editfile", async (req, res) => {
 	try {
-		const w = await Projects.findOneAndUpdate(
+		await Projects.findOneAndUpdate(
 			{
 				_id: req.params.projectId,
 				"files._id": req.body.fileId,
